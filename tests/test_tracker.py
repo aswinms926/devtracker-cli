@@ -3,7 +3,7 @@ Tests for the tracker module.
 """
 import pytest
 from datetime import datetime
-from devtracker.tracker import Tracker
+from devtracker_cli.tracker import Tracker
 
 def test_start_session():
     tracker = Tracker()

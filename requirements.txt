@@ -1,2 +1,4 @@
 click>=8.0.0
+matplotlib>=3.5.0
+numpy>=1.21.0
 pytest>=6.0.0 

@@ -7,6 +7,13 @@ from .tracker import Tracker
 from .storage import Storage
 from .utils import format_duration, generate_summary
 
+# Try to import visualization modules
+try:
+    from .visualization import plot_daily_productivity, plot_pie_chart, plot_weekly_heatmap
+    VISUALIZATION_AVAILABLE = True
+except ImportError:
+    VISUALIZATION_AVAILABLE = False
+
 @click.group()
 def cli():
     """DevTracker - Track your development time."""
@@ -160,6 +167,48 @@ def summary():
     click.echo(f"Total Breaks: {summary['total_breaks']}")
     click.echo(f"Efficiency: {summary['efficiency']}")
     click.echo("=" * 50)
+
+@cli.command(name='daily')
+@click.option('--days', '-d', type=int, default=7, help='Number of days to show (default: 7)')
+@click.option('--output', '-o', type=click.Path(), help='Save the chart to a file')
+def daily_chart(days, output):
+    """Show daily productivity chart for the last N days."""
+    if not VISUALIZATION_AVAILABLE:
+        click.echo("Error: Visualization features require matplotlib and numpy.")
+        click.echo("Please install them with: pip install matplotlib numpy")
+        return
+    
+    storage = Storage()
+    sessions = storage.get_daily_sessions(days)
+    plot_daily_productivity(sessions, days, output)
+
+@cli.command(name='pie')
+@click.option('--days', '-d', type=int, default=7, help='Number of days to show (default: 7)')
+@click.option('--output', '-o', type=click.Path(), help='Save the chart to a file')
+def time_distribution(days, output):
+    """Show pie chart of coding vs break time for the last N days."""
+    if not VISUALIZATION_AVAILABLE:
+        click.echo("Error: Visualization features require matplotlib and numpy.")
+        click.echo("Please install them with: pip install matplotlib numpy")
+        return
+    
+    storage = Storage()
+    sessions = storage.get_daily_sessions(days)
+    plot_pie_chart(sessions, days, output)
+
+@cli.command(name='heatmap')
+@click.option('--weeks', '-w', type=int, default=1, help='Number of weeks to show (default: 1)')
+@click.option('--output', '-o', type=click.Path(), help='Save the chart to a file')
+def weekly_heatmap(weeks, output):
+    """Show weekly activity heatmap for the last N weeks."""
+    if not VISUALIZATION_AVAILABLE:
+        click.echo("Error: Visualization features require matplotlib and numpy.")
+        click.echo("Please install them with: pip install matplotlib numpy")
+        return
+    
+    storage = Storage()
+    sessions = storage.get_weekly_sessions(weeks)
+    plot_weekly_heatmap(sessions, weeks, output)
 
 if __name__ == "__main__":
     cli() 

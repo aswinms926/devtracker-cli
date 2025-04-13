@@ -1,55 +1,102 @@
 # DevTracker
 
-A simple command-line tool to track your development time and breaks.
+[![PyPI version](https://badge.fury.io/py/devtracker-cli.svg)](https://badge.fury.io/py/devtracker-cli)
+[![Python Versions](https://img.shields.io/pypi/pyversions/devtracker-cli.svg)](https://pypi.org/project/devtracker-cli/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Development Time Tracking with Productivity Analytics
+
+• Implemented a CLI-based time tracking system in Python using session management 
+  and data persistence to track developers' coding time and breaks
+
+• Built an extensible visualization module using matplotlib to generate productivity 
+  insights through daily charts, time distribution, and weekly heatmaps
+
+• Developed a robust storage system for managing session data with support for 
+  historical analysis and real-time tracking
+
+---
+
+A powerful command-line tool for developers to track coding time, manage breaks, and visualize productivity patterns.
 
 ## Features
 
-- Start and stop development sessions
-- Track breaks during sessions
-- View detailed session logs
-- Get daily summaries of coding time vs break time
-- Calculate efficiency metrics
-- Clear session history when needed
+✨ **Core Features**
+- Track development sessions with task descriptions
+- Manage breaks during coding sessions
+- View detailed session logs and summaries
+- Calculate productivity metrics and efficiency
+
+📊 **Visualization**
+- Daily productivity charts
+- Time distribution analysis
+- Weekly activity heatmaps
+- Customizable date ranges
+
+🛠️ **Developer-Friendly**
+- Simple command-line interface
+- Persistent data storage
+- Configurable settings
+- Cross-platform support
 
 ## Installation
 
 ```bash
-pip install devtracker
+pip install devtracker-cli
 ```
 
-## Basic Commands
+## Quick Start
 
-- `devtracker start "task description"` - Start a new development session
-- `devtracker stop` - Stop the current session
-- `devtracker break "reason"` - Start a break during the current session
-- `devtracker resume` - Resume the current session after a break
-- `devtracker status` - Show current session status
-- `devtracker log` - Show today's session logs and summary
-- `devtracker clear` - Clear all session history and current session state
-
-## Example Workflow
-
+1. Start tracking your coding session:
 ```bash
-# Start a new session
 devtracker start "Implementing user authentication"
-
-# Take a break
-devtracker break "Lunch break"
-
-# Resume work
-devtracker resume
-
-# Stop the session
-devtracker stop
-
-# View today's logs and summary
-devtracker log
 ```
 
-## Log Output
+2. Take a break:
+```bash
+devtracker break "Coffee break"
+```
 
-The `log` command shows detailed information about your sessions:
+3. Resume coding:
+```bash
+devtracker resume
+```
 
+4. End your session:
+```bash
+devtracker stop
+```
+
+## Usage Guide
+
+### Basic Commands
+
+| Command | Description |
+|---------|-------------|
+| `devtracker start "task"` | Start a new development session |
+| `devtracker stop` | Stop the current session |
+| `devtracker break "reason"` | Start a break |
+| `devtracker resume` | Resume from break |
+| `devtracker status` | Show current status |
+| `devtracker log` | View today's activity |
+| `devtracker clear` | Clear all session data |
+
+### Visualization Commands
+
+| Command | Description | Options |
+|---------|-------------|----------|
+| `devtracker daily` | Show daily productivity | `-d DAYS`, `-o OUTPUT_FILE` |
+| `devtracker pie` | Show time distribution | `-d DAYS`, `-o OUTPUT_FILE` |
+| `devtracker heatmap` | Show activity heatmap | `-w WEEKS`, `-o OUTPUT_FILE` |
+
+#### Options
+- `-d, --days`: Number of days to analyze (default: 7)
+- `-w, --weeks`: Number of weeks to analyze (default: 1)
+- `-o, --output`: Save chart to file (e.g., `chart.png`)
+
+### Example Outputs
+
+#### Session Log
 ```
 Today's Log (2024-04-12):
 ==================================================
@@ -59,102 +106,87 @@ End Time: 12:30:00
 Duration: 2h 30m
 
 Breaks:
-- Lunch break
-  Start: 12:00:00
-  End: 13:00:00
-  Duration: 1h 0m
+- Coffee break
+  Start: 11:00:00
+  End: 11:15:00
+  Duration: 15m
 
-Total Break Time: 1h 0m
+Total Break Time: 15m
 ==================================================
 
 Today's Summary:
 ==================================================
 Total Sessions: 1
-Total Coding Time: 2h 30m
-Total Break Time: 1h 0m
+Total Coding Time: 2h 15m
+Total Break Time: 15m
 Total Breaks: 1
-Efficiency: 71.4%
+Efficiency: 90.0%
 ==================================================
 ```
 
-## Troubleshooting
+## Advanced Usage
 
-If you encounter the "session already in progress" error, use:
+### Time Range Analysis
 ```bash
-devtracker clear
+# View last 14 days of productivity
+devtracker daily -d 14
+
+# Analyze last month's time distribution
+devtracker pie -d 30
+
+# View last 4 weeks of activity patterns
+devtracker heatmap -w 4
 ```
-Then start a new session with:
+
+### Saving Visualizations
 ```bash
-devtracker start "your task"
-```
+# Save daily chart to file
+devtracker daily -o productivity.png
 
-## Development
+# Export time distribution
+devtracker pie -o distribution.png
 
-To set up the development environment:
-
-1. Clone the repository
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-3. Install development dependencies:
-   ```bash
-   pip install -e ".[dev]"
-   ```
-
-## Testing
-
-Run the tests with:
-
-```bash
-pytest
+# Save activity heatmap
+devtracker heatmap -o heatmap.png
 ```
 
 ## Data Storage
 
-Session data is stored in your home directory:
-- `~/.devtracker/sessions.json` - Historical session data
-- `~/.devtracker/current_session.json` - Active session data
+DevTracker stores all session data locally in:
+- Windows: `%USERPROFILE%\.devtracker\`
+- Unix/Mac: `~/.devtracker/`
+
+## Troubleshooting
+
+### Common Issues
+
+1. **"Session already in progress" error**
+   ```bash
+   devtracker clear
+   devtracker start "new task"
+   ```
+
+2. **"No active break" when resuming**
+   - Ensure you started a break using `devtracker break "reason"`
+   - Check current status with `devtracker status`
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-MIT License 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-from dataclasses import dataclass
-from datetime import datetime
+## Author
 
-@dataclass
-class Session:
-    task: str
-    start_time: datetime
-    end_time: datetime = None
-    breaks: list = None 
+Aswin M S - [GitHub](https://github.com/aswinms926)
 
-from setuptools import setup, find_packages
+## Acknowledgments
 
-setup(
-    name="devtracker",
-    version="0.1.0",
-    packages=find_packages(),
-    install_requires=[
-        "click>=8.0.0",
-    ],
-    entry_points={
-        "console_scripts": [
-            "devtracker=devtracker.cli:cli",
-        ],
-    },
-    author="Your Name",
-    author_email="your.email@example.com",
-    description="A command-line tool to track your development time and breaks",
-    long_description=open("README.md").read(),
-    long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/devtracker",
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
-    python_requires=">=3.6",
-) 
+- Thanks to all contributors
+- Inspired by the need for better developer time tracking
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history. 

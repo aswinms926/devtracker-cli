@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devtracker-cli"
+version = "0.1.0"
+description = "A command-line tool to track development time and breaks"
+readme = "README.md"
+authors = [{ name = "Aswin M S", email = "deto2026@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["development", "time-tracking", "productivity"]
+dependencies = [
+    "click>=8.0.0",
+    "matplotlib>=3.5.0",
+    "numpy>=1.21.0",
+]
+requires-python = ">=3.6"
+
+[project.urls]
+Homepage = "https://github.com/aswinms926/devtracker-cli" 
