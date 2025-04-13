@@ -187,6 +187,3 @@ Aswin M S - [GitHub](https://github.com/aswinms926)
 - Thanks to all contributors
 - Inspired by the need for better developer time tracking
 
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for version history. 
