@@ -184,6 +184,6 @@ Aswin M S - [GitHub](https://github.com/aswinms926)
 
 ## Acknowledgments
 
-- Thanks to all contributors
+- Thanks to all future contributors , feel free to contribute . 
 - Inspired by the need for better developer time tracking
 
