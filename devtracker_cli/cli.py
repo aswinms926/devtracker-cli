@@ -7,7 +7,7 @@ from .tracker import Tracker
 from .storage import Storage
 from .utils import format_duration, generate_summary
 
-# Try to import visualization modules
+
 try:
     from .visualization import plot_daily_productivity, plot_pie_chart, plot_weekly_heatmap
     VISUALIZATION_AVAILABLE = True
@@ -93,7 +93,7 @@ def log():
     
     for session in today_sessions:
         task = session.get('task')
-        if not task:  # Skip sessions without tasks
+        if not task:   
             continue
             
         click.echo(f"\nTask: {task}")
@@ -115,7 +115,7 @@ def log():
             total_break_time = 0
             for break_ in session["breaks"]:
                 reason = break_.get('reason')
-                if not reason:  # Skip breaks without reasons
+                if not reason:   
                     continue
                     
                 break_start = datetime.fromisoformat(break_['start_time'])
@@ -139,7 +139,6 @@ def log():
         
         click.echo("=" * 50)
     
-    # Add summary section
     click.echo("\nToday's Summary:")
     click.echo("=" * 50)
     click.echo(f"Total Sessions: {summary['total_sessions']}")

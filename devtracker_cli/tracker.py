@@ -1,6 +1,3 @@
-"""
-Core tracking functionality for DevTracker.
-"""
 from datetime import datetime
 from .storage import Storage
 from .utils import parse_iso_datetime
@@ -23,7 +20,7 @@ class Tracker:
         if self.current_session:
             raise RuntimeError("A session is already in progress. Use 'devtracker stop' to end it first.")
         
-        # Get the next available ID
+        
         sessions = self.storage.load_sessions()
         next_id = str(len(sessions) + 1)
         

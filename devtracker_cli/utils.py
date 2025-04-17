@@ -1,10 +1,8 @@
-"""
-Utility functions for DevTracker.
-"""
+
 from datetime import datetime, timedelta
 
 def format_duration(duration):
-    """Format a duration in seconds into a human-readable string."""
+    
     if isinstance(duration, timedelta):
         seconds = duration.total_seconds()
     else:
@@ -25,11 +23,11 @@ def format_duration(duration):
     return " ".join(parts)
 
 def parse_iso_datetime(iso_string):
-    """Parse an ISO format datetime string."""
+    
     return datetime.fromisoformat(iso_string)
 
 def calculate_session_duration(session):
-    """Calculate the actual coding duration of a session (excluding breaks)."""
+    
     start_time = parse_iso_datetime(session["start_time"])
     end_time = parse_iso_datetime(session["end_time"]) if "end_time" in session else datetime.now()
     
@@ -49,7 +47,7 @@ def calculate_session_duration(session):
     return coding_duration, break_duration
 
 def calculate_break_duration(session):
-    """Calculate the total break duration for a session in seconds."""
+     
     total_break_duration = 0
     for break_ in session.get("breaks", []):
         break_start = parse_iso_datetime(break_["start_time"])
@@ -58,7 +56,7 @@ def calculate_break_duration(session):
     return total_break_duration
 
 def generate_summary(sessions):
-    """Generate a summary of today's sessions."""
+    
     total_coding_duration = timedelta()
     total_break_duration = timedelta()
     total_breaks = 0
@@ -69,11 +67,11 @@ def generate_summary(sessions):
         total_break_duration += break_duration
         total_breaks += len(session.get("breaks", []))
     
-    # Total time = coding time + break time
+     
     total_time = total_coding_duration + total_break_duration
     
-    # Efficiency = (coding time / total time) * 100
-    # This shows what percentage of your total time was spent coding
+    
+    
     efficiency = (total_coding_duration.total_seconds() / total_time.total_seconds() * 100) if total_time.total_seconds() > 0 else 0
     
     return {

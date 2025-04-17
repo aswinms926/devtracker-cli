@@ -1,6 +1,3 @@
-"""
-Storage handling for DevTracker sessions.
-"""
 import json
 import os
 from datetime import datetime, timedelta
@@ -66,13 +63,13 @@ class Storage:
             session["id"] = str(len(sessions) + 1)
             sessions.append(session)
         else:
-            # Update existing session
+            
             for i, s in enumerate(sessions):
                 if s["id"] == session["id"]:
                     sessions[i] = session
                     break
             else:
-                # If session not found, add it
+                
                 sessions.append(session)
         
         self.sessions_file.write_text(json.dumps(sessions, indent=2))
